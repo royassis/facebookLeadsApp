@@ -1,0 +1,64 @@
+<html>
+    <head></head>
+    <body>
+        <script>
+            (function(d, s, id){
+               var js, fjs = d.getElementsByTagName(s)[0];
+               if (d.getElementById(id)) {return;}
+               js = d.createElement(s); js.id = id;
+               js.src = "https://connect.facebook.net/en_US/sdk.js";
+               fjs.parentNode.insertBefore(js, fjs);
+             }(document, 'script', 'facebook-jssdk'));
+
+            window.fbAsyncInit = function() {
+              FB.init({
+                appId      : '56833887771',
+                xfbml      : true,
+                version    : 'v10.0'
+              });
+              FB.AppEvents.logPageView();
+            };
+          
+        </script>
+
+        <div
+            class="fb-like"
+            data-share="true"
+            data-width="450"
+            data-show-faces="true">
+        </div>
+
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=911845922884633&autoLogAppEvents=1" nonce="FyRhwgt7"></script>
+        
+        <div 
+            class="fb-login-button" 
+            data-width="12" 
+            data-size="large" 
+            data-button-type="continue_with" 
+            data-layout="default" 
+            data-auto-logout-link="true" 
+            data-use-continue-as="false"
+            data-scope="public_profile,email,user_likes">
+        </div>
+
+        {% csrf_token %}
+        <script>
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        </script>
+
+       <script >
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    var accessToken = response.authResponse.accessToken;
+                    var xhttp = new XMLHttpRequest(); 
+                    console.log(accessToken);
+                    xhttp.open("POST", "http://localhost/myapp/gettoken", true);
+                    xhttp.send(accessToken);
+                } 
+            } );
+       </script> 
+
+
+    </body>
+</html>
