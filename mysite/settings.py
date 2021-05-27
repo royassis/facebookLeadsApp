@@ -38,8 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp.apps.MyappConfig',
-    'frontend.apps.FrontendConfig'
+    'frontend.apps.FrontendConfig',
+    'leads.apps.LeadsConfig',
+    'rest_framework'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
