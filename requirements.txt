@@ -1,6 +1,6 @@
 pandas~=1.2.3
 requests~=2.25.1
-facebook-business
+facebook_business
 django
 djangorestframework
 social-auth-app-django
