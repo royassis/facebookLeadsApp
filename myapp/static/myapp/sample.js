@@ -7,21 +7,37 @@
  }(document, 'script', 'facebook-jssdk'));
 
 window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '56833887771',
-    xfbml      : true,
-    version    : 'v10.0'
-  });
-  FB.AppEvents.logPageView();
+
+      FB.init({
+        appId      : '56833887771',
+        xfbml      : true,
+        version    : 'v10.0'
+      });
+
+      FB.AppEvents.logPageView();
+
 };
 
+function getAccessToken(response) {
+    var accessToken = response.authResponse.accessToken;
+    var xhttp = new XMLHttpRequest();
+    console.log(accessToken);
+    xhttp.open("POST", "http://localhost:8000/myapp/gettoken", true);
+    xhttp.setRequestHeader("X-CSRFToken", csrftoken);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send(JSON.stringify({"accessToken":accessToken}));
+}
 
-FB.getLoginStatus(function(response) {
-    if (response.status === 'connected') {
-        var accessToken = response.authResponse.accessToken;
-        var xhttp = new XMLHttpRequest();
-        console.log(accessToken);
-        xhttp.open("POST", "http://localhost/myapp/gettoken", true);
-        xhttp.send(accessToken);
-    }
-} );
+//FB.getLoginStatus(function(response) {
+//    if (response.status === 'connected') {
+//        var accessToken = response.authResponse.accessToken;
+//        var xhttp = new XMLHttpRequest();
+//        console.log(accessToken);
+//        xhttp.open("POST", "http://localhost:8000/myapp/gettoken", true);
+//        xhttp.setRequestHeader("X-CSRFToken", csrftoken);
+//        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+//        xhttp.send(JSON.stringify({"accessToken":accessToken}));
+//    }
+//} );
+
+
