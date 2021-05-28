@@ -26,6 +26,7 @@ function getAccessToken(response) {
     xhttp.setRequestHeader("X-CSRFToken", csrftoken);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(JSON.stringify({"accessToken":accessToken}));
+    window.location.replace("http://localhost:8000/");
 }
 
 //FB.getLoginStatus(function(response) {
